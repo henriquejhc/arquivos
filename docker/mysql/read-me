@@ -1,0 +1,31 @@
+
+# Acesso
+host: jdbc:mysql://172.23.221.66:3306/basedocker
+user: root
+pass: root666
+
+# docker exec -it CONTAINER_NAME bash
+# mysql -u root -p
+mysql> create user 'root'@'%' identified by 'password';
+mysql> flush privileges;
+mysql> exit
+
+
+
+mysql> create user 'root'@'%' identified by 'testing';
+ERROR 1396 (HY000): Operation CREATE USER failed for 'root'@'%'
+mysql> create user 'dockeruser'@'%' identified by 'docker1234';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant all privileges on *.* to 'dockeruser'@'%';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+
+
+GRANT ALL ON basedocker.* TO 'dockeruser'@'%' IDENTIFIED BY 'docker1234' WITH GRANT OPTION;
+
+GRANT ALL ON *.* TO 'dockeruser'@'%' IDENTIFIED BY 'docker1234' WITH GRANT OPTION;
